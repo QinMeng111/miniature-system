@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>管理员登录</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", "PingFang SC", "微软雅黑", sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+    .login-box {
+      width: 90%;
+      max-width: 400px;
+      background: white;
+      border-radius: 12px;
+      padding: 40px 30px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #4a90e2;
+      font-size: 20px;
+    }
+    p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 14px 30px;
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    button:hover {
+      background: #3a7bd5;
+    }
+    .error {
+      color: #e74c3c;
+      font-size: 14px;
+      text-align: left;
+      margin: 10px 0 0;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box">
+  <h2>🔐 管理员登录</h2>
+  <p>请输入访问密码以进入系统</p>
+  <input type="password" id="pwd-input" placeholder="请输入密码" />
+  <p id="error-msg" class="error"></p>
+  <button onclick="checkPassword()">立即登录</button>
+</div>
+
+<script>
+  // ✅ 设置你的密码（建议修改！）
+  const ADMIN_PASSWORD = '666666';
+
+  // ✅ 设置管理员页面的真实链接（必须是 /custom/ 开头的发布链接）
+  const ADMIN_URL = 'https://buisj7.aliwork.com/APP_R9QTM5SF6PT4J94BRVZO/custom/YOUR_MANAGER_FORM_ID?corpid=dingce8c8b4c34bc68d6f5bf40eda33b7ba0';
+
+  function checkPassword() {
+    const pwd = document.getElementById('pwd-input').value.trim();
+    const errorMsg = document.getElementById('error-msg');
+
+    if (!pwd) {
+      errorMsg.textContent = '请输入密码';
+      return;
+    }
+
+    if (pwd === ADMIN_PASSWORD) {
+      window.location.href = ADMIN_URL;
+    } else {
+      errorMsg.textContent = '密码错误，请重试';
+    }
+  }
+
+  // 支持回车提交
+  document.getElementById('pwd-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      checkPassword();
+    }
+  });
+</script>
+
+</body>
+</html>
